@@ -3,18 +3,19 @@ const cors = require("cors");
 const nodemailer = require("nodemailer");
 const app = express();
 
-const port = 5050;
+const PORT = 5050;
+const HOST = '0.0.0.0';
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.listen(port, () => {
-  console.log(`portfolio_server listening at http://localhost:${port}`);
-});
+app.listen(PORT, HOST, () => {
+  console.log(`running on http://${HOST}:${PORT}`);
+})
 
 app.post("/messages", (req, res) => {
-  const messageData = req.body.data;
+  const messageData = req.body;
   console.log("message data:", messageData);
   res.send(messageData);
   sendMessage(messageData).catch(
