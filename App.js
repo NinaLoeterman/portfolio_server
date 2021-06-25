@@ -15,6 +15,10 @@ app.listen(PORT, HOST, () => {
   console.log(`running on http://${HOST}:${PORT}`);
 });
 
+app.get("/", (req, res) => {
+  res.send("hello!");
+});
+
 app.post("/messages", (req, res) => {
   const messageData = req.body;
   res.send(messageData);
