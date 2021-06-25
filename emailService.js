@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-exports.sendMessage = async (messageData) => {
+const sendMessage = async (messageData) => {
   const transporter = nodemailer.createTransport({
     service: "outlook",
     port: 25,
@@ -12,7 +12,7 @@ exports.sendMessage = async (messageData) => {
 
   const message = {
     from: process.env.SENDING_EMAIL,
-    to: "nina.loeterman@gmail.com",
+    to: process.env.RECIPIENT_EMAIL,
     subject: "Someone wants to be in touch!",
     html: ` <div>Name: ${messageData.name}</div>
             <div>Email: ${messageData.email}</div>
@@ -25,3 +25,5 @@ exports.sendMessage = async (messageData) => {
       : console.log(`message sent: ${info.response}`);
   });
 };
+
+module.exports.sendMessage = sendMessage;
