@@ -17,11 +17,10 @@ app.listen(PORT, HOST, () => {
 
 app.post("/messages", (req, res) => {
   const messageData = req.body;
-  console.log("message data:", messageData);
   res.send(messageData);
   try {
     sendMessage(messageData);
   } catch (e) {
-    console.error("an error occured while sending your message", e);
+    console.error("an error occured while sending a message", e);
   }
 });
