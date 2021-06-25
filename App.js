@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer");
 const app = express();
 
 const PORT = 5050;
-const HOST = '0.0.0.0';
+const HOST = "0.0.0.0";
 
 app.use(cors());
 app.use(express.json());
@@ -12,15 +12,17 @@ app.use(express.urlencoded({ extended: true }));
 
 app.listen(PORT, HOST, () => {
   console.log(`running on http://${HOST}:${PORT}`);
-})
+});
 
 app.post("/messages", (req, res) => {
   const messageData = req.body;
   console.log("message data:", messageData);
   res.send(messageData);
-  sendMessage(messageData).catch(
-    console.error("an error occured while sending your message", e)
-  );
+  try {
+    sendMessage(messageData);
+  } catch (e) {
+    console.error("an error occured while sending your message", e);
+  }
 });
 
 const sendMessage = async (messageData) => {
@@ -28,13 +30,13 @@ const sendMessage = async (messageData) => {
     service: "outlook",
     port: 25,
     auth: {
-      user: "spaceholder@outlook.com", //fill this in,
-      pass: "spaceholder", //fill this in
+      user: "meitar.takeaway@outlook.com",
+      pass: "takemeaway!!!",
     },
   });
 
   const message = {
-    from: "placeholder@outlook.com",
+    from: "meitar.takeaway@outlook.com",
     to: "nina.loeterman@gmail.com",
     subject: "Someone wants to be in touch!",
     html: ` <div>Name: ${messageData.name}</div>
